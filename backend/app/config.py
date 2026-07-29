@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     jwt_expire_minutes: int = 60 * 24  # 24 hours
 
     # Registration
-    allow_public_registration: bool = False
+    allow_public_registration: bool = True
 
     # Upload limits
     max_upload_mb: int = 2000  # 2GB default
@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite+aiosqlite:///./televault.db"
 
     # CORS
-    cors_origins: str = "http://localhost:5173"
+    cors_origins: str = "http://localhost:5173,https://trove-delta.vercel.app"
 
     # Trash auto-purge days
     trash_purge_days: int = 30
