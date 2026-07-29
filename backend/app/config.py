@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     database_url: str = "sqlite+aiosqlite:///./televault.db"
 
     # CORS
-    cors_origins: str = "http://localhost:5173,https://trove-delta.vercel.app"
+    cors_origins: str = "http://localhost:5173,https://trove-delta.vercel.app,https://cloud-storage-gilt.vercel.app"
 
     # Trash auto-purge days
     trash_purge_days: int = 30
