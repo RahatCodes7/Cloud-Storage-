@@ -69,11 +69,12 @@ async def rebuild_from_snapshot(db: AsyncSession) -> bool:
         return False
 
     try:
-        snapshot_data = await retrieve_snapshot_from_telegram()
-        if not snapshot_data:
+        raw = await retrieve_snapshot_from_telegram()
+        if not raw:
             logger.info("No snapshot found in Telegram, starting fresh")
             return False
 
+        snapshot_data = json.loads(raw)
         users_data = snapshot_data.get("users", [])
         files_data = snapshot_data.get("files", [])
 
