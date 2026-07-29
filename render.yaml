@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: trove
+    env: python
+    plan: free
+    buildCommand: |
+      cd backend && pip install -r requirements.txt
+      cd ../frontend && npm install && npm run build
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: TELEGRAM_API_ID
+        sync: false
+      - key: TELEGRAM_API_HASH
+        sync: false
+      - key: TELEGRAM_SESSION_STRING
+        sync: false
+      - key: TELEGRAM_STORAGE_CHAT_ID
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ALLOW_PUBLIC_REGISTRATION
+        value: "false"
+      - key: MAX_UPLOAD_MB
+        value: "2000"
+      - key: CORS_ORIGINS
+        value: "https://trove.onrender.com"
