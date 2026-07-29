@@ -48,6 +48,7 @@ export default function FileCard({ file, onRename, onDelete, onRestore, onPrevie
           <img
             src={filesApi.preview(file.id)}
             alt={file.display_name}
+            crossOrigin='use-credentials'
             className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
             loading='lazy'
             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
@@ -59,6 +60,7 @@ export default function FileCard({ file, onRename, onDelete, onRestore, onPrevie
         <div className='relative h-36 -mx-4 -mt-4 mb-3 bg-vault-bg overflow-hidden flex items-center justify-center'>
           <video
             src={filesApi.preview(file.id)}
+            crossOrigin='use-credentials'
             className='w-full h-full object-cover'
             preload='metadata'
             onError={(e) => { (e.target as HTMLVideoElement).style.display = 'none' }}

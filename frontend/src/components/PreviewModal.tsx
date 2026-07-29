@@ -83,6 +83,7 @@ export default function PreviewModal({ file, onClose }: PreviewModalProps) {
             <img
               src={previewUrl}
               alt={file.display_name}
+              crossOrigin='use-credentials'
               className='max-w-full max-h-[70vh] object-contain rounded-lg'
             />
           )}
@@ -91,6 +92,7 @@ export default function PreviewModal({ file, onClose }: PreviewModalProps) {
               src={previewUrl}
               controls
               autoPlay
+              crossOrigin='use-credentials'
               className='max-w-full max-h-[70vh] rounded-lg'
             >
               Your browser does not support video playback.
@@ -99,7 +101,7 @@ export default function PreviewModal({ file, onClose }: PreviewModalProps) {
           {isAudio && (
             <div className='flex flex-col items-center gap-4 p-8'>
               <div className='text-6xl'>🎵</div>
-              <audio src={previewUrl} controls autoPlay className='w-full max-w-md' />
+              <audio src={previewUrl} controls autoPlay crossOrigin='use-credentials' className='w-full max-w-md' />
             </div>
           )}
           {isPdf && (
