@@ -49,8 +49,8 @@ export const filesApi = {
   delete: (id: string) => api.delete('/files/' + id),
   deletePermanent: (id: string) => api.delete('/files/' + id + '/permanent'),
   restore: (id: string) => api.post<FileItem>('/files/' + id + '/restore'),
-  download: (id: string) => '/api/files/' + id + '/download',
-  preview: (id: string) => '/api/files/' + id + '/preview',
+  download: (id: string) => API_BASE + '/api/files/' + id + '/download',
+  preview: (id: string) => API_BASE + '/api/files/' + id + '/preview',
   createShareLink: (id: string, expires_in_hours?: number, max_downloads?: number) =>
     api.post('/files/' + id + '/share', null, { params: { expires_in_hours, max_downloads } }),
 }

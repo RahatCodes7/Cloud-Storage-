@@ -41,10 +41,41 @@ export default function FileCard({ file, onRename, onDelete, onRestore, onPrevie
   const isPreviewable = file.mime_type.startsWith('image/') || file.mime_type.startsWith('video/') || file.mime_type.startsWith('audio/') || file.mime_type.includes('pdf')
 
   return (
-    <div className='file-card group'>
+    <div className='file-card group overflow-hidden'>
+      {/* Thumbnail */}
+      {file.mime_type.startsWith('image/') && (
+        <div className='relative h-36 -mx-4 -mt-4 mb-3 bg-vault-bg overflow-hidden'>
+          <img
+            src={filesApi.preview(file.id)}
+            alt={file.display_name}
+            className='w-full h-full object-cover transition-transform duration-300 group-hover:scale-105'
+            loading='lazy'
+            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
+          />
+          <div className='absolute inset-0 bg-gradient-to-t from-vault-surface/80 via-transparent to-transparent' />
+        </div>
+      )}
+      {file.mime_type.startsWith('video/') && (
+        <div className='relative h-36 -mx-4 -mt-4 mb-3 bg-vault-bg overflow-hidden flex items-center justify-center'>
+          <video
+            src={filesApi.preview(file.id)}
+            className='w-full h-full object-cover'
+            preload='metadata'
+            onError={(e) => { (e.target as HTMLVideoElement).style.display = 'none' }}
+          />
+          <div className='absolute inset-0 flex items-center justify-center'>
+            <div className='w-12 h-12 rounded-full bg-black/50 flex items-center justify-center backdrop-blur-sm'>
+              <svg className='w-6 h-6 text-white ml-0.5' fill='currentColor' viewBox='0 0 24 24'><path d='M8 5v14l11-7z'/></svg>
+            </div>
+          </div>
+          <div className='absolute inset-0 bg-gradient-to-t from-vault-surface/80 via-transparent to-transparent' />
+        </div>
+      )}
       <div className='flex items-start justify-between mb-3'>
         <div className='flex items-center gap-3'>
-          <div className='text-2xl'>{getIcon(file.mime_type)}</div>
+          {!file.mime_type.startsWith('image/') && !file.mime_type.startsWith('video/') && (
+            <div className='text-2xl'>{getIcon(file.mime_type)}</div>
+          )}
           <div className='min-w-0'>
             <div className='font-medium truncate max-w-[200px]' title={file.display_name}>{file.display_name}</div>
             <div className='text-xs text-vault-muted font-mono mt-0.5'>{formatSize(file.size_bytes)}</div>
